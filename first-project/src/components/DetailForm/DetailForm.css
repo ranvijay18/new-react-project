@@ -1,0 +1,36 @@
+.detail-card{
+    background-color: rgba(0, 255, 64, 0.541);
+    width: 40%;
+    margin-left: 450px;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.detail-form{
+    margin-left: 20px;
+    color:white;
+}
+
+button{
+    margin-top: 20px;
+    padding: 5px 10px;
+    outline:none;
+    border:none;
+    border-radius: 8px;
+}
+
+
+input{
+  outline: none;
+  border: none;
+  border-radius: 8px;
+  height: 25px;
+  margin-top: 3px;
+}
+input:last-of-type{
+    width: 89%;
+}
+
+label{
+    font-weight: bold;
+}

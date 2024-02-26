@@ -1,0 +1,18 @@
+.user-list{
+    background-color: rgba(0, 0, 0, 0.404);
+    width: 43%;
+    margin-left: 450px;
+    padding: 10px 0px;
+    margin-top: 20px;
+    border-radius: 10px;
+}
+
+
+ul{
+    list-style-type: none;
+    background-color: aqua;
+    width: 80%;
+    margin-left: 50px;
+    padding: 10px;
+    border-radius: 10px;
+}
