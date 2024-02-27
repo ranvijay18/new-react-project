@@ -22,7 +22,7 @@ const User = () => {
         <div className="user-list">
             {user.map((ele, index) => (
                <ul key={index}>
-               <li>{ele.username} ({ele.age} year old)</li>
+               <li>{ele.username} ({ele.age} year old) {ele.college}</li>
                </ul>
             ))}
         </div>

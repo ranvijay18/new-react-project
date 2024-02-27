@@ -27,7 +27,7 @@ input{
   height: 25px;
   margin-top: 3px;
 }
-input:last-of-type{
+input:nth-of-type(2){
     width: 89%;
 }
 

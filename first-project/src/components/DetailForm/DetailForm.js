@@ -28,6 +28,10 @@ const DetailForm = (props) => {
            <br />
            <input type="number" onChange={handleChange} name="age" />
            <br />
+           <label htmlFor="college">College</label>
+           <br />
+           <input type="text" onChange={handleChange} name="college" size="63"/>
+           <br />
            <button type="submit">Add User</button>
            </form>
         </div>
