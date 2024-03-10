@@ -1,8 +1,9 @@
-import React, {useReducer, useState} from 'react';
+import React, {useReducer, useState, useEffect} from 'react';
 
 import Card from '../UI/Card/Card';
 import classes from './Login.module.css';
 import Button from '../UI/Button/Button';
+import Input from '../UI/Input/Input';
 
 
 const emailReducer = (state, action) => {
@@ -46,35 +47,35 @@ const Login = (props) => {
 
   const [emailState, dispatchEmail] = useReducer(emailReducer, {
     value: '',
-    isValid: true
+    isValid: null
   })
 
    const [collegeState, dispatchCollege] = useReducer(collegeReducer, {
     value: '',
-    isValid: true
+    isValid: null
   })
 
   const [passwordState, dispatchPassword] = useReducer(passwordReducer, {
     value: '',
-    isValid: true
+    isValid: null
   })
 
 
 
 
-  // useEffect(() => {
+  useEffect(() => {
 
-  //   const identifier = setTimeout(() => {
-  //       setFormIsValid(
-  //           emailState.value.includes('@') && enteredPassword.trim().length > 6 && college.trim().length > 1
-  //         );
-  //   },500);
+    const identifier = setTimeout(() => {
+        setFormIsValid(
+            emailState.isValid && passwordState.isValid && collegeState.isValid
+          );
+    },500);
 
-  //   return () => {
-  //       clearTimeout(identifier);
-  //   }
+    return () => {
+        clearTimeout(identifier);
+    }
  
-  // },[emailState.value, enteredPassword, college]);
+  },[emailState, passwordState, collegeState]);
 
   const emailChangeHandler = (event) => {
     dispatchEmail({type:"USER_EMAIL", value: event.target.value});
@@ -108,50 +109,31 @@ const Login = (props) => {
   return (
     <Card className={classes.login}>
       <form onSubmit={submitHandler}>
-        <div
-          className={`${classes.control} ${
-            emailState.isValid === false ? classes.invalid : ''
-          }`}
-        >
-          <label htmlFor="email">E-Mail</label>
-          <input
-            type="email"
-            id="email"
-            value={emailState.value}
-            onChange={emailChangeHandler}
-            onBlur={validateEmailHandler}
-          />
-        </div>
-        
-        <div
-          className={`${classes.control} ${
-           collegeState.isValid === false ? classes.invalid : ''
-          }`}
-        >
-          <label htmlFor="college">College</label>
-          <input
-            type="text"
-            id="college"
-            value={collegeState.value}
-            onChange={collegeChangeHandler}
-            onBlur={validateCollegeHandler}
-          />
-        </div>
+        <Input 
+        id={"eamil"}
+        type={"email"}
+        label={"E-mail"}
+        isValid={emailState.isValid}
+        onChange={emailChangeHandler}
+        onBlur={validateEmailHandler}
+        />
 
-        <div
-          className={`${classes.control} ${
-            passwordState.IsValid === false ? classes.invalid : ''
-          }`}
-        >
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            id="password"
-            value={passwordState.value}
-            onChange={passwordChangeHandler}
-            onBlur={validatePasswordHandler}
-          />
-        </div>
+        <Input 
+        id={"college"}
+        type={"text"}
+        label={"College"}
+        isValid={collegeState.isValid}
+        onChange={collegeChangeHandler}
+        onBlur={validateCollegeHandler}
+        />
+        <Input 
+        id={"password"}
+        type={"text"}
+        label={"Password"}
+        isValid={passwordState.isValid}
+        onChange={passwordChangeHandler}
+        onBlur={validatePasswordHandler}
+        />
         <div className={classes.actions}>
           
           <Button type="submit" className={classes.btn} disabled={!formIsValid}>
