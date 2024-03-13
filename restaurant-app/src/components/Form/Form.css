@@ -1,0 +1,27 @@
+form{
+    text-align: center;
+    background-color: blueviolet;
+    padding: 20px ;
+    margin: 0px 70px;
+    border-radius: 20px;
+    color: white;
+}
+
+label{
+    margin-left:5px;
+}
+
+input{
+    border-radius: 20px;
+    border: none;
+    outline: none;
+    height: 25px;
+}
+
+button{
+    margin-left: 20px;
+    padding: 5px 10px;
+    border-radius: 20px;
+    border: none;
+    outline: none;
+}
