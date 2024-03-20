@@ -1,21 +1,20 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "./Form.css";
-const Form = () => {
+const Form = ({ onAddOrder }) => {
 
-    const [orderDetails, setOrderDetails] = useState({});
-   let details = []
+    const [orderDetails, setOrderDetails] = useState({
+      orderId: "",
+      orderPrice: "",
+      dish:"",
+      table: ""
+    });
     
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // console.log(orderDetails);
-        // const jsonString = JSON.stringify(orderDetails);
-        // localStorage.setItem("orderDetails", jsonString)
+      onAddOrder(orderDetails);
+        
     }
-    useEffect(() => {
-        details = [{...orderDetails}];
-        console.log(details)
-      },[handleSubmit])
 
     const handleChange = (e) => {
         e.preventDefault();
@@ -28,13 +27,13 @@ const Form = () => {
 
     <form onSubmit={handleSubmit}>
       <label>Order Id: </label>
-    <input type="text" name="orderId" onChange={handleChange}/>
+    <input type="text" name="orderId" value={orderDetails.orderId} onChange={handleChange}/>
     <label>Order Price: </label>
-    <input type="text" name="orderPrice" onChange={handleChange} />
+    <input type="text" name="orderPrice" value={orderDetails.orderPrice} onChange={handleChange} />
     <label>Choose Dish: </label>
-    <input type="text" name="dish" onChange={handleChange} />
+    <input type="text" name="dish" value={orderDetails.dish} onChange={handleChange} />
     <label>Table: </label>
-    <select name="table" onChange={handleChange}>
+    <select name="table" value={orderDetails.table} onChange={handleChange}>
         <option>--Select--</option>
         <option>Table 1</option>
         <option>Table 2</option>

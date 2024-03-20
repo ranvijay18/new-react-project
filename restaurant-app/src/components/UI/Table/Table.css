@@ -1,0 +1,15 @@
+.table{
+    background-color: aqua;
+    display: flex;
+    justify-content: space-around;
+    margin: 50px;
+}
+
+.table-order{
+    background-color: #f4f4f4;
+    width: 400px;
+    height: 500px;
+    margin: 10px;
+    text-align: center;
+}
+
