@@ -1,14 +1,17 @@
 import './App.css';
 import CreatePassword from './components/CreatePassword/CreatePassword';
-import SearchPassword from './components/SearchPassword/SearchPassword';
+import AllPassword from './components/AllPasswords/AllPassword';
 import SearchForm from './components/SearchForm/SearchForm';
-import { useState, useContext } from 'react'; 
-import PasswordContext from './store/password-context';
+import { useState } from 'react'; 
+import PasswordProvider from './store/PasswordProvider';
+import Head from './components/UI/Head';
+import EditPassword from './components/CreatePassword/EditPassword';
 
 function App(props) {
 
   const [showForm, setShowForm] = useState(false);
-  const [passLength, setPassLength] = useState(0);
+  const [showEditForm, setShowEditForm] = useState(false);
+
 
   const showFormModal = () => {
     setShowForm(true);
@@ -18,22 +21,26 @@ function App(props) {
     setShowForm(false);
   }
 
-  const showPasswordLength = (length) =>{
-    setPassLength(length);
+  const hideEditForm = () => {
+    setShowEditForm(false);
   }
 
-  const passwordCtx = useContext(PasswordContext);
+  const onShowEditForm = () => {
+    setShowEditForm(true);
+  }
 
   return (
     <div  className="App">
-       <h1>Password Keeper</h1>
-        <p>Total Passwords: {passLength+1}</p>
+    <PasswordProvider>
+       <Head />
         <button onClick={showFormModal}>Add New Password</button>
-        {showForm && <CreatePassword onHideForm = {hideFormModal}   passwordLength={showPasswordLength}/> }
+        {showForm && <CreatePassword onHideForm = {hideFormModal}/>}
+        {showEditForm && <EditPassword onHideForm = {hideEditForm} />}
       <br />
       <br />
       <SearchForm />
-      <SearchPassword />
+      <AllPassword showEditForm={onShowEditForm}/>
+      </PasswordProvider>
     </div>
   );
 }
