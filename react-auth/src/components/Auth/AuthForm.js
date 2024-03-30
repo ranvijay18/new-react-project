@@ -1,6 +1,7 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useContext } from 'react';
 
 import classes from './AuthForm.module.css';
+import TokenContext from '../../context/token-context';
 
 const AuthForm = () => {
 
@@ -12,6 +13,8 @@ const AuthForm = () => {
   const switchAuthModeHandler = () => {
     setIsLogin((prevState) => !prevState);
   };
+
+  const tokenCtx = useContext(TokenContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -34,11 +37,10 @@ const AuthForm = () => {
       }).then(res => {
         if(res.ok){
           setIsLoading(false);
-          return res.json().then(data => console.log(data))
+          res.json().then(data => tokenCtx.addToken(data.idToken))
         }else{
           setIsLoading(false);
           return res.json().then(data => alert(data.error.message))
-         
         }
       }).catch(err => {
         console.log(err);
