@@ -20,6 +20,29 @@ const AuthForm = () => {
     const password = passwordInputRef.current.value;
 
     if(isLogin){
+      setIsLoading(true)
+        fetch('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyAWnTSSM62-LxPcuSBx2HBV5wVcYcp6138',{
+        method:'POST',
+        body:JSON.stringify({ 
+          email: email,
+          password: password,
+          returnSecureToken: true
+        }),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }).then(res => {
+        if(res.ok){
+          setIsLoading(false);
+          return res.json().then(data => console.log(data))
+        }else{
+          setIsLoading(false);
+          return res.json().then(data => alert(data.error.message))
+         
+        }
+      }).catch(err => {
+        console.log(err);
+      })
 
     }else{
       setIsLoading(true)
