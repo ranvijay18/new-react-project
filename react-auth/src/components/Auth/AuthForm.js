@@ -1,5 +1,5 @@
 import { useState, useRef, useContext } from 'react';
-
+import { useNavigate } from 'react-router-dom';
 import classes from './AuthForm.module.css';
 import TokenContext from '../../context/token-context';
 
@@ -9,6 +9,7 @@ const AuthForm = () => {
   const passwordInputRef = useRef();
   const [isLogin, setIsLogin] = useState(true);
   const [isLoading, setIsLoading] = useState(false)
+  const navigate = useNavigate();
 
   const switchAuthModeHandler = () => {
     setIsLogin((prevState) => !prevState);
@@ -37,7 +38,10 @@ const AuthForm = () => {
       }).then(res => {
         if(res.ok){
           setIsLoading(false);
-          res.json().then(data => tokenCtx.addToken(data.idToken))
+          res.json().then(data => {
+            tokenCtx.login(data.idToken);
+            return navigate('/profile');
+          })
         }else{
           setIsLoading(false);
           return res.json().then(data => alert(data.error.message))

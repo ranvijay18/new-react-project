@@ -2,9 +2,10 @@ import React from "react";
 
 
 const TokenContext = React.createContext({
-    token:[],
-    addToken: (token) => {},
-    removeToken: (token) => {}
+    token:'',
+    isLogin: false,
+    login: (token) => {},
+    logout: () => {},
 })
 
 export default TokenContext;

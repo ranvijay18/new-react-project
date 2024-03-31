@@ -1,25 +1,25 @@
-import { Routes, Route } from 'react-router-dom';
-
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Layout from './components/Layout/Layout';
 import UserProfile from './components/Profile/UserProfile';
 import AuthPage from './pages/AuthPage';
 import HomePage from './pages/HomePage';
 import TokenProvider from './context/TokenProvider';
-import ContextLayout from './components/Layout/ContextLayout';
+
+
 
 function App() {
   return (
+
+    <TokenProvider>
     <Layout>
-      <TokenProvider>
       <Routes>
-        <Route element={<ContextLayout />}>
-        <Route path='/' exact element={<HomePage />} />
-        <Route path='/auth' element={<AuthPage />} />
-        <Route path='/profile' element={ <UserProfile />} />
-        </Route>
+        <Route path='/' exact element={<HomePage/>} />
+        <Route path='/auth' element={<AuthPage/>} />
+        <Route path='/profile' element={<UserProfile/>} />
       </Routes>
-      </TokenProvider>
     </Layout>
+    </TokenProvider>
+    
   );
 };
 

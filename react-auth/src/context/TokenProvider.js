@@ -2,26 +2,28 @@ import TokenContext from './token-context'
 import { useState } from 'react'
 
 const TokenProvider = (props) => {
-    const [token, setToken] = useState([])
+    const [token, setToken] = useState(null)
+    const isLoggedIn = !!token;
+   
 
     const handleAddToken = (token) => {
          setToken(token);
-         console.log(token);
     }
 
     const handleRemoveToken = () => {
-          setToken([]);
+          setToken(null);
     }
 
     const tokenContext = {
        token: token,
-       addToken: handleAddToken,
-       removeToken: handleRemoveToken
+       isLogin: isLoggedIn,
+       login: handleAddToken,
+       logout: handleRemoveToken
     }
      return(
-        <TokenContext.Provider value={tokenContext}>
-            {props.chidren}
-        </TokenContext.Provider>
+       <TokenContext.Provider value={tokenContext}>
+         {props.children}
+       </TokenContext.Provider>
      )
 }
 
