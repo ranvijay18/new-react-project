@@ -16,7 +16,7 @@ const ProfileForm = () => {
       fetch('https://identitytoolkit.googleapis.com/v1/accounts:update?key=AIzaSyAWnTSSM62-LxPcuSBx2HBV5wVcYcp6138',{
         method:'POST',
         body:JSON.stringify({ 
-          idToken: tokenCtx.token,
+          idToken: localStorage.getItem('token'),
           password: newPassword,
           returnSecureToken: false
         }),

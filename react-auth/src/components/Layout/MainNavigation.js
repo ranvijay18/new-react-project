@@ -1,17 +1,19 @@
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import classes from './MainNavigation.module.css';
-import { useContext } from 'react';
-import TokenContext from '../../context/token-context';
+
 
 const MainNavigation = () => {
-  const tokenCtx = useContext(TokenContext);
+
   const navigate = useNavigate()
 
-const handleLogout = () =>{
+  const isLoggedIn = !!localStorage.getItem('token')
 
-  tokenCtx.logout();
+const handleLogout = () =>{
+  // tokenCtx.logout();
+  localStorage.removeItem('token');
   navigate('/auth')
+ 
 }
 
    
@@ -21,7 +23,7 @@ const handleLogout = () =>{
         <div className={classes.logo}>React Auth</div>
       </Link>
       <nav>
-          {!tokenCtx.isLogin ? 
+          {!isLoggedIn ? 
           <ul>
           <li>
             <Link to='/auth'>Login</Link>

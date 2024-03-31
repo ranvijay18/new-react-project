@@ -1,7 +1,6 @@
-import { useState, useRef, useContext } from 'react';
+import { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import classes from './AuthForm.module.css';
-import TokenContext from '../../context/token-context';
 
 const AuthForm = () => {
 
@@ -15,7 +14,6 @@ const AuthForm = () => {
     setIsLogin((prevState) => !prevState);
   };
 
-  const tokenCtx = useContext(TokenContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -39,7 +37,7 @@ const AuthForm = () => {
         if(res.ok){
           setIsLoading(false);
           res.json().then(data => {
-            tokenCtx.login(data.idToken);
+            localStorage.setItem('token', data.idToken)
             return navigate('/profile');
           })
         }else{
