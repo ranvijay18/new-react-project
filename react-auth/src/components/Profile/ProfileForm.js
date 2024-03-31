@@ -1,4 +1,4 @@
-import { useContext, useRef,  } from 'react';
+import { useContext, useRef } from 'react';
 import classes from './ProfileForm.module.css';
 import TokenContext from '../../context/token-context';
 import { useNavigate } from 'react-router-dom';
@@ -8,6 +8,7 @@ const ProfileForm = () => {
   const newPasswordRef = useRef();
   const tokenCtx = useContext(TokenContext);
   const navigate = useNavigate()
+
 
   const handleSubmit=(e)=>{
       e.preventDefault();
